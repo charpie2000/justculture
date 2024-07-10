@@ -32,31 +32,25 @@
 <script type='text/javascript' src='trivantis-strings.js' charset='UTF-8'></script>
 
 <script>
-var VarTrivSelCap = new Variable('VarTrivSelCap', 'none', 0, 0, null, null, 'just_culture_in_the_caf', true);
+VarTrivSelCap = new Variable( 'VarTrivSelCap', 'none', 0, 0, null, null, 'just_culture_in_the_caf', true );
 var pagePlayer = null;
 var bHasAutoStart = true;
 var jumpToPage = getQueryParams().jmptopg;
-
-if (typeof(jumpToPage) == "undefined" && history && history.state && history.state.status) {
-  jumpToPage = history.state.status;
-}
-
+if( typeof(jumpToPage)=="undefined" && history && history.state && history.state.status ) jumpToPage = history.state.status;
 var audioPoolCount = 12;
 var videoPoolCount = 0;
 var bAutoStartOnFirstPage = false;
-
-if (window.jQuery) {
-  triv$ = window.jQuery.noConflict(true);
-}
-
+if(window.jQuery) triv$ = window.jQuery.noConflict(true);
 var firstPageName = jumpToPage ? jumpToPage : 'page157568.html';
-
-// Immediately load the desired page
-pagePlayer = new jsPagePlayer();
-pagePlayer.gotoPage(firstPageName, true);
-window.bAutoStartOnPage = bAutoStartOnFirstPage;
-enableAutoStart(null, t); // Assuming `t` is defined somewhere
-</script>
+function onLoad(){
+	 pagePlayer = new jsPagePlayer();
+	 function cont(){
+		 pagePlayer.gotoPage(firstPageName, true);
+	 } 
+	 window.bAutoStartOnPage = bAutoStartOnFirstPage;
+	 enableAutoStart ( cont , t); 
+}
+</script>	
 	
 </head>
 
